@@ -4,29 +4,75 @@
 //
 //  Created by Fellipe Ricciardi Chiarello on 30/09/19.
 //  Copyright © 2019 Fellipe Ricciardi Chiarello. All rights reserved.
-//
+// API KEY 409292ea
 
 import UIKit
 
-class listaFilmesTableViewController: UITableViewController {
+class listaFilmesTableViewController: UITableViewController, UISearchBarDelegate {
     
-    var listaFilmes: [String] = ["Filme1", "Filme2", "Filme3", "Filme4", "Filme5"]
-
+    // MARK: - Atributos
+    var listaFilmes: [String] = [""]
+    var urlAPI: String?
+    
+    // MARK: - Outlets
+    @IBOutlet weak var searchFilmes: UISearchBar!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.searchFilmes.delegate = self
         
         
     }
-
-
+    
+    //MARK: - Metodos
+    
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+                guard let textoPesquisado = searchBar.text else { return }
+        let formataTexto = textoPesquisado.replacingOccurrences(of: " ", with: "+")
+        self.urlAPI = "http://www.omdbapi.com/?s=\(formataTexto)&type=movie&r=json&apikey=409292ea"
+        
+        guard let urlFormatada = urlAPI else { return }
+        jsonRequest(url: urlFormatada)
+    }
+    
+    func jsonRequest (url: String) {
+        
+        guard let requestURL = URL(string: url) else { return }
+        var request = URLRequest(url: requestURL)
+        let task = URLSession.shared.dataTask(with: request) { (data, requisicao, error) in
+            if error == nil {
+                if let dadosRetorno = data {
+                    do {
+                        if let objetoJson = try JSONSerialization.jsonObject(with: dadosRetorno, options: []) as? [String: Any] {
+                            request.httpBody = data
+                            request.httpMethod = "POST"
+                            if let search = objetoJson["Search"] as? [String: Any] {
+                                let title = search["Title"]
+                                DispatchQueue.main.async {
+                                    print(title)
+                                }
+                            }
+                        }
+                    } catch {
+                        print(error .localizedDescription)
+                    }
+                }else {print("Erro 1!")}
+            }
+        }
+        task.resume()
+    }
+    
+    // MARK: - TableView DataSource
     override func numberOfSections(in tableView: UITableView) -> Int {
 
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+
         return listaFilmes.count
     }
 
@@ -46,51 +92,4 @@ class listaFilmesTableViewController: UITableViewController {
         performSegue(withIdentifier: "segueDetalhes", sender: indexPath)
 
     }
-   
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
