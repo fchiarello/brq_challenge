@@ -15,6 +15,7 @@
 		C9D38661234224C3005BBF84 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9D3865F234224C3005BBF84 /* LaunchScreen.storyboard */; };
 		C9D3866C234224C3005BBF84 /* BRQiOSChallengeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D3866B234224C3005BBF84 /* BRQiOSChallengeTests.swift */; };
 		C9D3867723422627005BBF84 /* listaFilmesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D3867623422627005BBF84 /* listaFilmesTableViewController.swift */; };
+		C9D814AC2354C0B600D845A0 /* Filmes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D814AB2354C0B600D845A0 /* Filmes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		C9D3866B234224C3005BBF84 /* BRQiOSChallengeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BRQiOSChallengeTests.swift; sourceTree = "<group>"; };
 		C9D3866D234224C3005BBF84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C9D3867623422627005BBF84 /* listaFilmesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = listaFilmesTableViewController.swift; sourceTree = "<group>"; };
+		C9D814AB2354C0B600D845A0 /* Filmes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filmes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 				C9D38654234224C2005BBF84 /* AppDelegate.swift */,
 				C9D38656234224C2005BBF84 /* SceneDelegate.swift */,
 				C9D3867623422627005BBF84 /* listaFilmesTableViewController.swift */,
+				C9D814AB2354C0B600D845A0 /* Filmes.swift */,
 				C9D38658234224C2005BBF84 /* ViewController.swift */,
 				C9D3865A234224C2005BBF84 /* Main.storyboard */,
 				C9D3865D234224C3005BBF84 /* Assets.xcassets */,
@@ -207,6 +210,7 @@
 				C9D38655234224C2005BBF84 /* AppDelegate.swift in Sources */,
 				C9D38657234224C2005BBF84 /* SceneDelegate.swift in Sources */,
 				C9D3867723422627005BBF84 /* listaFilmesTableViewController.swift in Sources */,
+				C9D814AC2354C0B600D845A0 /* Filmes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
